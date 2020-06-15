@@ -8,7 +8,7 @@ start.o:
 
 kernel.main.o:
 	@echo "Building kernel.o"
-	@gdc -fno-druntime -m32 -c kernel.main.d -o kernel.main.o -g
+	ldc2 --nodefaultlib -m32 --betterC --relocation-model=static --singleobj -g -c kernel.main.d kernel.main.o
 
 kernel.bin: start.o kernel.main.o
 	@echo "Linking all"
@@ -19,4 +19,4 @@ run:
 
 clean:
 	@echo "Cleaning " $(OBJECT_FILES)
-	@rm -f $(OBJECT_FILES)
+	@rm -f $(OBJECT_FILES) kernel.bin
