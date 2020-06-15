@@ -12,7 +12,8 @@ kernel.main.o:
 
 kernel.bin: start.o kernel.main.o
 	@echo "Linking all"
-	@ld -melf_i386 -T linker.ld -o kernel.bin start.o kernel.main.o
+	#@ld -melf_i386 -T linker.ld -o kernel.bin start.o kernel.main.o
+	docker run --rm -it -v $(shell pwd):/tmp nolze/binutils-all ld -melf_i386 -T linker.ld -o kernel.bin start.o kernel.main.o
 
 run:
 	@qemu-system-i386 -kernel kernel.bin
