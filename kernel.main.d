@@ -1,5 +1,5 @@
 module kernel.main;
-import core.bitop; // will be core.volatile in later gdc
+import core.volatile;
  
 extern(C) void main(uint magic, uint addr) {
     int ypos = 0; //Starting points of the cursor
