@@ -21,7 +21,7 @@ run:
 	@qemu-system-i386 -kernel kernel.bin
 
 docker:
-	@docker run --rm -it -v $(shell pwd):/tmp racerxdl/dosbuild make clean && make
+	@docker run --rm -it -v $(shell pwd):/tmp racerxdl/dosbuild sh -c "make clean && make"	
 
 clean:
 	@echo "Cleaning " $(OBJECT_FILES)
