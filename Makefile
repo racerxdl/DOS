@@ -1,12 +1,13 @@
 OBJECT_FILES=$(shell find . -name "*.o")
 
 LD=ld
+NASM=nasm
 
 all: kernel.bin
 
 start.o:
 	@echo "Building start.o"
-	nasm -f elf -o start.o start.asm
+	@$(NASM) -f elf -o start.o start.asm
 
 kernel.main.o:
 	@echo "Building kernel.o"
