@@ -12,14 +12,14 @@ start.o:
 
 kernel.main.o:
 	@echo "Building kernel.o"
-	@ldc2 -mtriple i386-linux-gnu --nodefaultlib --betterC --relocation-model=static --singleobj -g -c kernel.main.d kernel.main.o
+	ldc2 -mtriple i386-linux-gnu --betterC --relocation-model=static --singleobj -g -c kernel.main.d kernel.main.o
 
 %.o: %.d
 	@echo "Building $< -> $@"
-	@ldc2 -mtriple i386-linux-gnu --nodefaultlib --betterC --relocation-model=static --singleobj -g -c "$<" -of "$@"
+	ldc2 -mtriple i386-linux-gnu --betterC --relocation-model=static --singleobj -g -c "$<" -of "$@"
 
 kernel.bin: start.o kernel.main.o $(OBJECTS)
-	@echo "Linking all"
+	@echo "Linking all $(OBJECTS)"
 	@$(LD) -melf_i386 -T linker.ld -o kernel.bin start.o kernel.main.o $(OBJECTS)
 
 run:
@@ -30,4 +30,4 @@ docker:
 
 clean:
 	@echo "Cleaning " $(OBJECT_FILES)
-	@rm -f $(OBJECT_FILES) kernel.bin
+	@rm -f $(OBJECT_FILES) kernel.main.o kernel.bin start.o
